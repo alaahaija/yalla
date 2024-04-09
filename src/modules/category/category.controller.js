@@ -1,0 +1,41 @@
+import slugify from "slugify";
+import categoryModel from "../../../db/models/category.model.js";
+import cloudinary from "../../utls/cloudinary.js";
+export const createCat = async (req,res,next)=>{
+    const {name} = req.body;
+    if(await categoryModel.findOne({name})){
+        return next(new Error('Duplicate Category Name'));
+    }
+    const slug = slugify(name);
+    const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path,{folder:'category'});
+    const category = await categoryModel.create({name,slug,image:{secure_url,public_id},createdBy:req.user._id,updatedBy:req.user._id});
+
+    return res.json({message:'success',category});
+};
+export const updateCat = async (req,res,next)=>{
+    const {categoryId} = req.params;
+    const category = await categoryModel.findById(categoryId);
+    if (!category){
+        return next(new Error('category is not found'))
+    }
+    category.name = req.body.name;
+    category.slug = slugify(req.body.name);
+    if(req.file){
+        const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path,{folder:'category'});
+        cloudinary.uploader.destroy(category.image.public_id);
+        category.image = {secure_url,public_id};
+    }
+    category.updatedBy = req.user._id;
+    await category.save();
+    return res.json({message:"success",category});
+};
+export const getAllCat =  async (req,res,next)=>{
+    const categories = await categoryModel.find({});
+    const count = await categoryModel.countDocuments({});
+    return res.json({message:"success",count,categories});
+};
+export const getCat = async(req,res,next)=>{
+    const {categoryId} = req.params;
+    const category = await categoryModel.findById(categoryId);
+    return res.json({message:"success",category});
+};

@@ -1,0 +1,55 @@
+import { Schema , model} from "mongoose";
+
+const userSchema = new Schema({
+    userName :{
+        type:String,
+        required:true,
+        min:4,
+        max:15,
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true,
+    },
+    password:{
+        type:String,
+        required:true,
+    },
+    image:{
+        type:Object,
+    },
+    phone:{
+        type:String,
+    },
+    address:{
+        type:String,
+    },
+    confirmEmail:{
+        type:Boolean,
+        default:false,
+    },
+    gender:{
+        type:String,
+        enum:['Male','Female'],
+        default:'Female',
+    },
+    status:{
+        type:String,
+        enum:['Active','Inactive'],
+        default:'Active',
+    },
+    role:{
+        type:String,
+        enum:['User','Admin','Stackholder'],
+        default:'User',
+    },
+    sendCode:{
+        type:String,
+        default:null,
+    },
+},{
+    timestamps:true,
+});
+const userModel = model('User',userSchema);
+export default userModel;
