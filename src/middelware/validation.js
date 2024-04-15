@@ -1,4 +1,3 @@
-
 import joi from "joi";
 export const generalFeilds ={
     id :joi.string().min(24).max(24),

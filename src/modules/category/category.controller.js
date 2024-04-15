@@ -22,7 +22,7 @@ export const updateCat = async (req,res,next)=>{
     category.slug = slugify(req.body.name);
     if(req.file){
         const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path,{folder:'category'});
-        cloudinary.uploader.destroy(category.image.public_id);
+        await cloudinary.uploader.destroy(category.image.public_id);
         category.image = {secure_url,public_id};
     }
     category.updatedBy = req.user._id;
