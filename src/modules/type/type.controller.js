@@ -13,9 +13,9 @@ export const getAllTypes = async (req,res,next)=>{
     return res.json({message:"success",count,types});
 };
 export const getActive = async (req,res,next)=>{
-    const types = await typeModel.find({});
-    const count = await typeModel.countDocuments({status:"Active"});
-    return res.json({message:"success",count,types});
+    const types = await typeModel.find({status:"Active"});
+    const count = await typeModel.countDocuments();
+    return res.json({message:"ok",count,types});
 };
 export const getType = async (req,res,next)=>{
     const {typeId} = req.params;

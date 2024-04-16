@@ -3,6 +3,11 @@ const restaurentSchema = new Schema({
     name:{
         type:String,
         required:true,
+        unique:true,
+    },
+    slug:{
+        type:String,
+        required:true,
     },
     logo:{
         type:Object,
@@ -15,6 +20,7 @@ const restaurentSchema = new Schema({
     phone:{
         type:String,
         required:true,
+        unique:true,
     },
     description:{
         type:String,
@@ -27,6 +33,11 @@ const restaurentSchema = new Schema({
     slogan:{
         type:String,
         required:true,
+    },
+    status:{
+        type:String,
+        enum:['Active','Inactive'],
+        default:'Active',
     },
 });
 const restaurentModel = model('Restaurent',restaurentSchema);
