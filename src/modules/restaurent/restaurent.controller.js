@@ -20,8 +20,8 @@ export const getAllRestaurent = async (req,res,next)=>{
 };
 export const getActive = async (req,res,next)=>{
     const restaurent = await restaurentModel.find({status:'Active'}).exec();
-    //const count = await restaurentModel.countDocuments({});
-    return res.json({message:"ok",restaurent});
+    const count = await restaurentModel.countDocuments({});
+    return res.json({message:"success",count,restaurent});
 };
 export const updateType = async (req,res,next)=>{
     const {restaurentId} = req.params;
@@ -36,7 +36,6 @@ export const updateType = async (req,res,next)=>{
         await cloudinary.uploader.destroy(restaurent.logo.public_id);
         req.body.logo = {secure_url,public_id};
     }
-    //await restaurent.save();
     const newRestaurent = await restaurentModel.findByIdAndUpdate(restaurentId,req.body,{new:true});
     return res.json({message:"success",newRestaurent});
 };

@@ -32,7 +32,7 @@ const userSchema = new Schema({
     gender:{
         type:String,
         enum:['Male','Female'],
-        default:'Female',
+        default:'Male',
     },
     status:{
         type:String,
@@ -41,7 +41,7 @@ const userSchema = new Schema({
     },
     role:{
         type:String,
-        enum:['User','Admin','Stackholder'],
+        enum:['User','Admin','Stackholder','delivery'],
         default:'User',
     },
     sendCode:{

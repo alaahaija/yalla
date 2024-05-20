@@ -5,11 +5,17 @@ const typeSchema = new Schema({
         required:false,
         unique:true,
     },
+    slug:{
+        type:String,
+        required:true,
+    },
     status:{
         type:String,
         enum:['Active','Inactive'],
         default:'Active',
     },
+},{
+    timestamps:true,
 });
 const typeModel = model('Type',typeSchema);
 export default typeModel;

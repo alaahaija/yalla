@@ -1,16 +1,21 @@
 import { Schema, Types, model } from "mongoose";
 
-const categorySchema = new Schema({
+const couponSchema = new Schema({
     name:{
         type:String,
         required:true,
+        unique:true,
     },
-    image:{
-        type:Object,
+    amount:{
+        type:Number,
         required:true,
     },
-    slug:{
-        type:String,
+    usedBy:[{
+        type:Types.ObjectId,
+        ref:'User',
+    }],
+    expireDate:{
+        type:Date,
         required:true,
     },
     createdBy:{
@@ -26,5 +31,6 @@ const categorySchema = new Schema({
 },{
     timestamps:true,
 });
-const categoryModel = model('Category',categorySchema);
-export default categoryModel;
+
+const couponModel = model('Coupon',couponSchema);
+export default couponModel;

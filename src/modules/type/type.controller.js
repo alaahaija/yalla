@@ -1,6 +1,9 @@
+import slugify from "slugify";
 import typeModel from "../../../db/models/type.model.js";
 
 export const createType = async (req,res,next)=>{
+    const {name} =req.body;
+    req.body.slug = slugify(name);
     const type = await typeModel.create(req.body); 
     if(!type){
         return next (new Error('ERROR WHILE CREATING TYPE'));
@@ -15,7 +18,7 @@ export const getAllTypes = async (req,res,next)=>{
 export const getActive = async (req,res,next)=>{
     const types = await typeModel.find({status:"Active"});
     const count = await typeModel.countDocuments();
-    return res.json({message:"ok",count,types});
+    return res.json({message:"success",count,types});
 };
 export const getType = async (req,res,next)=>{
     const {typeId} = req.params;
@@ -24,6 +27,8 @@ export const getType = async (req,res,next)=>{
 };
 export const updateType = async (req,res,next)=>{
     const {typeId} = req.params;
+    const {name} = req.body;
+    req.body.slug = slugify(name);
     const types = await typeModel.findByIdAndUpdate(typeId,req.body,{new:true});
     if(!types){
         return next (new Error('ERROR WHILE CREATING TYPE'));

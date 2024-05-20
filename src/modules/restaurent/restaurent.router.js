@@ -4,6 +4,8 @@ import fileUpload from "../../utls/multer.js";
 import { asyncHandler } from "../../utls/error.handling.js";
 import { authorization } from "../../middelware/authorization.js";
 import { endPoints } from "./restaurent.endpoint.js";
+import * as resValidate from "./restaurent.validation.js";
+import { validation } from "../../middelware/validation.js";
 const router = Router();
 
 router.post('/create',authorization(endPoints.createRestaurent),fileUpload().single('logo'),asyncHandler(restaurentController.createRestaurent));

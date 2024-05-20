@@ -17,6 +17,7 @@ export const register = joi.object({
     gender:joi.string(),
     phone:joi.string().min(10).max(10),
     address:joi.string(),
+    role:joi.string(),
 
 });
 export const login = joi.object({

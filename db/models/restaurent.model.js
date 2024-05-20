@@ -29,6 +29,7 @@ const restaurentSchema = new Schema({
     typeId:{
         type: Types.ObjectId,
         ref:'Type',
+        required:true,
     },
     slogan:{
         type:String,
@@ -39,6 +40,12 @@ const restaurentSchema = new Schema({
         enum:['Active','Inactive'],
         default:'Active',
     },
+    userId:{
+        type:Types.ObjectId,
+        ref:'User'
+    },
+},{
+    timestamps:true,
 });
 const restaurentModel = model('Restaurent',restaurentSchema);
 export default restaurentModel;

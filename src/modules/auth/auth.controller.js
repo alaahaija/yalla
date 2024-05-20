@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { nanoid , customAlphabet } from "nanoid";
 import { sendEmail } from "../../utls/email.js";
 export const register = async(req,res,next)=>{
-    const {userName,email,password,gender,phone,address} = req.body;
+    const {userName,email,password,gender,phone,address,role='User'} = req.body;
     const user = await userModel.findOne({email});
     if(user){
         return next(new Error("email already exists"));
@@ -17,8 +17,10 @@ export const register = async(req,res,next)=>{
     `;
     await sendEmail(email,`confirmEmail`,html);
     const hashedPassword = await bcrypt.hash(password,parseInt(process.env.SALTROUND));
-    const newUser = await userModel.create({userName,email,password:hashedPassword,gender,phone,address});
-    return res.json({message:'ok',newUser});
+    const newUser = await userModel.create({userName,email,password:hashedPassword,gender,
+    image:{secuire_urll:"https://res.cloudinary.com/dvwv3k1cp/image/upload/v1716240418/users/profile_atdbgf.png"},
+    phone,address,role});
+    return res.json({message:'success',newUser});
 };
 export const confirmEmail = async(req,res,next)=>{
     const {token} = req.params;

@@ -3,6 +3,11 @@ import authRouter from './modules/auth/auth.router.js';
 import categoryRouter from "./modules/category/category.router.js";
 import typeRouter from './modules/type/type.router.js';
 import restaurentRouter from "./modules/restaurent/restaurent.router.js";
+import productRouter from "./modules/product/product.router.js";
+import couponRouter from "./modules/coupon/coupon.router.js"
+import cartRouter from "./modules/cart/cart.router.js";
+import orderRouter from "./modules/order/order.router.js"
+import deliveryRouter from "./modules/delivery/delivery.router.js";
 import cors from 'cors';
 import { globalErrorHandler } from "./utls/error.handling.js";
 const initApp = (app,express)=>{
@@ -13,6 +18,11 @@ const initApp = (app,express)=>{
     app.use('/category',categoryRouter);
     app.use('/type',typeRouter);
     app.use('/restaurent',restaurentRouter);
+    app.use('/product',productRouter);
+    app.use('/coupon',couponRouter);
+    app.use('/cart',cartRouter);
+    app.use('/order',orderRouter);
+    app.use('/delivery',deliveryRouter);
     app.get('*',(req,res)=>{
         return res.json({message:"PAGE NOT FOUND"});
     });
