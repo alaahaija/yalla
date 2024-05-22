@@ -9,6 +9,7 @@ router.post('/create',authorization(endPoints.createType),asyncHandler(typeContr
 router.get('/getall',authorization(endPoints.getAll),asyncHandler(typeController.getAllTypes));
 router.get('/active',asyncHandler(typeController.getActive));
 router.get('/getType/:typeId',asyncHandler(typeController.getType));
+router.get('/restaurent/:typeId',asyncHandler(typeController.getRestaurents));
 router.patch('/update/:typeId',authorization(endPoints.updateType),asyncHandler(typeController.updateType));
 
 export default router;

@@ -1,5 +1,6 @@
 import slugify from "slugify";
 import typeModel from "../../../db/models/type.model.js";
+import restaurentModel from "../../../db/models/restaurent.model.js";
 
 export const createType = async (req,res,next)=>{
     const {name} =req.body;
@@ -24,6 +25,11 @@ export const getType = async (req,res,next)=>{
     const {typeId} = req.params;
     const type = await typeModel.findById(typeId);
     return res.json({message:"success",type});
+};
+export const getRestaurents = async(req,res,next)=>{
+    const {typeId} = req.params;
+    const restaurent = await restaurentModel.find({typeId});
+    return res.json({message:"success",restaurent});
 };
 export const updateType = async (req,res,next)=>{
     const {typeId} = req.params;
