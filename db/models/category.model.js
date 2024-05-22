@@ -13,6 +13,11 @@ const categorySchema = new Schema({
         type:String,
         required:true,
     },
+    restaurentId:{
+        type:Types.ObjectId,
+        ref:"Restaurent",
+        required:true,
+    },
     createdBy:{
         type: Types.ObjectId,
         ref:'User',

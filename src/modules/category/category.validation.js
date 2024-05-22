@@ -10,6 +10,7 @@ export const createCat = joi.object({
     file:generalFeilds.file.required().messages({
         "any.required":"file is required",
     }),
+    restaurentId:generalFeilds.id.required(),
 });
 export const updateCat = joi.object({
     name :joi.string().min(3).max(15).required().messages({

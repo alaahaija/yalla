@@ -1,14 +1,20 @@
 import slugify from "slugify";
 import categoryModel from "../../../db/models/category.model.js";
 import cloudinary from "../../utls/cloudinary.js";
+import restaurentModel from "../../../db/models/restaurent.model.js";
 export const createCat = async (req,res,next)=>{
     const {name} = req.body;
+    const {restaurentId} = req.params;
+    const restaurent = await restaurentModel.findById(restaurentId);
+    if(!restaurent){
+        return next(new Error("restaurent not found"));
+    }
     if(await categoryModel.findOne({name})){
         return next(new Error('Duplicate Category Name'));
     }
     const slug = slugify(name);
     const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path,{folder:'category'});
-    const category = await categoryModel.create({name,slug,image:{secure_url,public_id},createdBy:req.user._id,updatedBy:req.user._id});
+    const category = await categoryModel.create({name,slug,restaurentId,image:{secure_url,public_id},createdBy:req.user._id,updatedBy:req.user._id});
 
     return res.json({message:'success',category});
 };
