@@ -41,7 +41,15 @@ export const getByRestaurent = async (req,res,next)=>{
 };
 export const getAll = async (req,res,next)=>{
     const {restaurentId} = req.params;
-    const products = await productModel.find({restaurentId});
+    const products = await productModel.find({restaurentId}).populate([
+{
+        path:'categoryId',
+        select:'name',
+    },{
+        path:'restaurentId',
+        select:'name',
+    }
+]);
     const count = await productModel.countDocuments({});
     return res.json({message:"success",count,products});
 };
