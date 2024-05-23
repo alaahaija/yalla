@@ -12,3 +12,8 @@ export const createCoupon = async (req,res,next)=>{
     const coupon = await couponModel.create(req.body);
     return res.json({message:"success",coupon});
 };
+export const getCoupon = async(req,res,next)=>{
+    const coupons = await couponModel.find();
+    const count = await couponModel.countDocuments({});
+    return res.json({message:"success",count,coupons});
+};

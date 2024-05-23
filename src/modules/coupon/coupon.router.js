@@ -8,5 +8,6 @@ import { asyncHandler } from "../../utls/error.handling.js";
 const router = Router();
 
 router.post('/create',authorization(endPoint.createCoupon),validation(couponValidator.createCoupon),asyncHandler(couponController.createCoupon));
+router.get('/getAll',authorization(endPoint.getCoupons),asyncHandler(couponController.getCoupon));
 
 export default router;
