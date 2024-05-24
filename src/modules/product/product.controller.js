@@ -4,7 +4,6 @@ import restaurentModel from "../../../db/models/restaurent.model.js";
 import cloudinary from "../../utls/cloudinary.js";
 import productModel from "../../../db/models/product.model.js";
 
-
 export const createPro = async (req,res,next)=>{
     const {name,price,discount,categoryId,restaurentId} = req.body;
     const category = await categoryModel.findById(categoryId);
@@ -15,9 +14,12 @@ export const createPro = async (req,res,next)=>{
     if(!restaurent){
         return next(new Error('restaurent not found'));
     }
+    if(await productModel.findOne({name})){
+        return next(new Error('Duplicate Product Name'));
+    }
     req.body.finalPrice = (price - (price * (discount || 0) / 100)).toFixed(2);
     req.body.slug = slugify(name);
-    const {secure_url,public_id} = await cloudinary.uploader.upload(req.files.image[0].path,{folder:"product"});
+    const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path,{folder:"product"});
     req.body.image ={secure_url,public_id};
     req.body.createdBy = req.user._id;
     req.body.updatedBy = req.user._id;
@@ -86,8 +88,8 @@ export const updatePro = async (req,res,next)=>{
     product.slug = slugify(name);/* */
     product.finalPrice = (price - (price * (discount || 0) / 100)).toFixed(2);
 
-    if(req.files.image){
-        const {secure_url,public_id} = await cloudinary.uploader.upload(req.files.image[0].path,{folder:'product'});
+    if(req.file){
+        const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path,{folder:'product'});
         await cloudinary.uploader.destroy(product.image.public_id);
         product.image = {secure_url,public_id};
     }

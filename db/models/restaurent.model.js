@@ -46,6 +46,13 @@ const restaurentSchema = new Schema({
     },
 },{
     timestamps:true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true},
+});
+restaurentSchema.virtual("categories",{
+    ref:'Category',
+    localField:'_id',
+    foreignField:'restaurentId'
 });
 const restaurentModel = model('Restaurent',restaurentSchema);
 export default restaurentModel;

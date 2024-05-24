@@ -8,10 +8,10 @@ import * as resValidate from "./restaurent.validation.js";
 import { validation } from "../../middelware/validation.js";
 const router = Router();
 
-router.post('/create',authorization(endPoints.createRestaurent),fileUpload().single('logo'),asyncHandler(restaurentController.createRestaurent));
-router.get('/getall',authorization(endPoints.getAll),asyncHandler(restaurentController.getAllRestaurent));
+router.post('/create',asyncHandler(authorization(endPoints.createRestaurent)),fileUpload().single('logo'),validation(resValidate.createRestaurent),asyncHandler(restaurentController.createRestaurent));
+router.get('/getall',asyncHandler(authorization(endPoints.getAll)),asyncHandler(restaurentController.getAllRestaurent));
 router.get('/active',asyncHandler(restaurentController.getActive));
-router.patch('/update/:restaurentId',authorization(endPoints.updatType),fileUpload().single('logo'),asyncHandler(restaurentController.updateType));
+router.patch('/update/:restaurentId',asyncHandler(authorization(endPoints.updateRestaurent)),fileUpload().single('logo'),validation(resValidate.updateRestaurent),asyncHandler(restaurentController.updateRestaurent));
 
 
 export default router;

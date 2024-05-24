@@ -19,11 +19,11 @@ export const getAllRestaurent = async (req,res,next)=>{
     return res.json({message:"success",count,restaurent});
 };
 export const getActive = async (req,res,next)=>{
-    const restaurent = await restaurentModel.find({status:'Active'}).exec();
+    const restaurent = await restaurentModel.find({status:'Active'}).populate('categories').exec();
     const count = await restaurentModel.countDocuments({});
     return res.json({message:"success",count,restaurent});
 };
-export const updateType = async (req,res,next)=>{
+export const updateRestaurent = async (req,res,next)=>{
     const {restaurentId} = req.params;
     const restaurent = await restaurentModel.findById(restaurentId);
     if(!restaurent){
