@@ -7,7 +7,7 @@ import { endPoint } from "./coupon.endpoint.js";
 import { asyncHandler } from "../../utls/error.handling.js";
 const router = Router();
 
-router.post('/create',authorization(endPoint.createCoupon),validation(couponValidator.createCoupon),asyncHandler(couponController.createCoupon));
-router.get('/getAll',authorization(endPoint.getCoupons),asyncHandler(couponController.getCoupon));
+router.post('/create',asyncHandler(authorization(endPoint.createCoupon)),validation(couponValidator.createCoupon),asyncHandler(couponController.createCoupon));
+router.get('/getAll',asyncHandler(authorization(endPoint.getCoupons)),asyncHandler(couponController.getCoupon));
 
 export default router;
