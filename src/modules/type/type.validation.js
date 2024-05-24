@@ -21,5 +21,6 @@ export const updateType = joi.object({
         "any.required":"name is required",
         "string.empty":"name is required"
     }),
+    status:joi.string(),
     typeId:generalFeilds.id.required(),
 });
