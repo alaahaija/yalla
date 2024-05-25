@@ -9,9 +9,6 @@ export const createCat = async (req,res,next)=>{
     if(!restaurent){
         return next(new Error("restaurent not found"));
     }
-    if(await categoryModel.findOne({name})){
-        return next(new Error('Duplicate Category Name'));
-    }
     const slug = slugify(name);
     const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path,{folder:'category'});
     const category = await categoryModel.create({name,slug,restaurentId,image:{secure_url,public_id},createdBy:req.user._id,updatedBy:req.user._id});
