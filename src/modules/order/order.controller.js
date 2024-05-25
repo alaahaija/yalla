@@ -6,14 +6,14 @@ import restaurentModel from "../../../db/models/restaurent.model.js";
 import userModel from "../../../db/models/user.model.js";
 
 export const createOrder = async(req,res,next)=>{
-    const {couponId} = req.body;
+    const {couponName} = req.body;
     const cart = await cartModel.findOne({userId:req.user._id});
     if(!cart){
         return next(new Error('cart is empty'));
     }
     req.body.products = cart.products;
-    if(couponId){
-        const coupon = await couponModel.findById(couponId);
+    if(couponName){
+        const coupon = await couponModel.findOne({name:couponName});
         if(!coupon){
             return next(new Error('coupon not found')); 
         }
