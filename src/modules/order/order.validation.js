@@ -8,6 +8,6 @@ export const createOrder = joi.object({
 });
 export const changeStatus = joi.object({
     status:joi.string().required(),
-    deliveryId:generalFeilds.id.required(),
+    //deliveryId:generalFeilds.id.required(),
     id:generalFeilds.id.required(),
 });
