@@ -6,5 +6,6 @@ import { asyncHandler } from "../../utls/error.handling.js";
 const router = Router();
 
 router.get('/getStackholder',authorization(endPoint.getStackholder),asyncHandler(userController.getStackholder));
+router.get('/getDelivery/:orderId',authorization(endPoint.getStackholder),asyncHandler(userController.getDelivery));
 
 export default router;
