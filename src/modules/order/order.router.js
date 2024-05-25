@@ -7,7 +7,7 @@ import { validation } from "../../middelware/validation.js";
 import * as orderValidator from "./order.validation.js"; 
 const router = Router();
 
-router.post('/create',asyncHandler(authorization(endPoint.create)),validation(orderValidator.createOrder),asyncHandler(orderController.createOrder));
+router.post('/create',asyncHandler(authorization(endPoint.create)),asyncHandler(orderController.createOrder));
 router.get('/getUserOrder',asyncHandler(authorization(endPoint.getUserOrder)),asyncHandler(orderController.getUserOrder));
 router.get('/getDetails/:id',asyncHandler(authorization(endPoint.details)),asyncHandler(orderController.getOrder));
 router.get('/stackholder/all',asyncHandler(authorization(endPoint.getStackholderOrder)),asyncHandler(orderController.getStackholderOrder));
