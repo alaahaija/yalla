@@ -84,7 +84,10 @@ export const getOrder = async(req,res,next)=>{
 };
 export const getStackholderOrder = async(req,res,next)=>{
     const {status} = req.body
-    const restaurentId = await restaurentModel.findOne({userId:req.user._id});
+    const restaurentId = await restaurentModel.findOne({userId:req.user._id}).populate({
+        path:'userId',
+        select:'userName',
+    });
     const order = await orderModel.find({
 
         restaurentId: restaurentId,
