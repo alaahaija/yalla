@@ -109,13 +109,12 @@ export const changeStatus = async(req,res,next)=>{
     if(!order){
         return next (new Error('order not found'));
     }
-    order.status = status;
-    if(order.status == "onWay"){
+    if(status == "onWay"){
         if(!req.body.deliveryId){
             return next (new Error('plz select delivery'));
         }
         order.deliveryId= req.body.deliveryId;
     }
-    await order.save();
+    await orderModel.findByIdAndUpdate(req.params.id,{status})
     return res.json({message:"success",order});
 };
