@@ -12,6 +12,6 @@ router.post('/create',asyncHandler(authorization(endPoints.createRestaurent)),fi
 router.get('/getall',asyncHandler(authorization(endPoints.getAll)),asyncHandler(restaurentController.getAllRestaurent));
 router.get('/active',asyncHandler(restaurentController.getActive));
 router.patch('/update/:restaurentId',asyncHandler(authorization(endPoints.updateRestaurent)),fileUpload().single('logo'),validation(resValidate.updateRestaurent),asyncHandler(restaurentController.updateRestaurent));
-
+router.get('/random',asyncHandler(restaurentController.getRandomRest));
 
 export default router;

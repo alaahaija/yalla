@@ -39,3 +39,9 @@ export const updateRestaurent = async (req,res,next)=>{
     const newRestaurent = await restaurentModel.findByIdAndUpdate(restaurentId,req.body,{new:true});
     return res.json({message:"success",newRestaurent});
 };
+export const getRandomRest = async(req,res,next)=>{
+    const restaurents = await restaurentModel.aggregate([
+        {$sample:{size:3}}
+    ]);
+    return res.json({message:"success",restaurents});
+};
