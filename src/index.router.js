@@ -9,6 +9,7 @@ import couponRouter from "./modules/coupon/coupon.router.js"
 import cartRouter from "./modules/cart/cart.router.js";
 import orderRouter from "./modules/order/order.router.js"
 import deliveryRouter from "./modules/delivery/delivery.router.js";
+import settingRouter from "./modules/setting/setting.router.js";
 import cors from 'cors';
 import { globalErrorHandler } from "./utls/error.handling.js";
 const initApp = (app,express)=>{
@@ -25,6 +26,7 @@ const initApp = (app,express)=>{
     app.use('/cart',cartRouter);
     app.use('/order',orderRouter);
     app.use('/delivery',deliveryRouter);
+    app.use('/setting',settingRouter);
     app.get('*',(req,res)=>{
         return res.json({message:"PAGE NOT FOUND"});
     });
