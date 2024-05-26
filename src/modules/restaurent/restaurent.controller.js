@@ -45,3 +45,8 @@ export const getRandomRest = async(req,res,next)=>{
     ]);
     return res.json({message:"success",restaurents});
 };
+export const getRestBySearch = async(req,res,next)=>{
+    const {address} = req.params;
+    const restaurent = await restaurentModel.find({address});
+    return res.json({message:"success",restaurent});
+};

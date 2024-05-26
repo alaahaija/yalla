@@ -13,5 +13,6 @@ router.get('/getall',asyncHandler(authorization(endPoints.getAll)),asyncHandler(
 router.get('/active',asyncHandler(restaurentController.getActive));
 router.patch('/update/:restaurentId',asyncHandler(authorization(endPoints.updateRestaurent)),fileUpload().single('logo'),validation(resValidate.updateRestaurent),asyncHandler(restaurentController.updateRestaurent));
 router.get('/random',asyncHandler(restaurentController.getRandomRest));
+router.get('/search/:address',asyncHandler(restaurentController.getRestBySearch));
 
 export default router;
