@@ -10,3 +10,8 @@ export const getDelivery = async(req,res,next)=>{
     const delivery = await userModel.find({address:order.address});
     return res.json({message:"success",delivery});
 };
+export const getUsers = async(req,res,next)=>{
+    const users = await userModel.find({});
+    const count = await userModel.countDocuments({});
+    return res.json({message:"success",count,users});
+};

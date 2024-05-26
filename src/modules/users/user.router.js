@@ -7,5 +7,7 @@ const router = Router();
 
 router.get('/getStackholder',authorization(endPoint.getStackholder),asyncHandler(userController.getStackholder));
 router.get('/getDelivery/:orderId',authorization(endPoint.getStackholder),asyncHandler(userController.getDelivery));
+router.get('/getUsers',authorization(endPoint.getUsers),asyncHandler(userController.getUsers));
+
 
 export default router;
