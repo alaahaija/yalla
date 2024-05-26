@@ -2,7 +2,7 @@ import { Schema, model, Types } from "mongoose";
 
 const settingSchema = new Schema({
     phone:{
-        type:Number,
+        type:String,
         required:true,
     },
     email:{
