@@ -9,5 +9,6 @@ router.get('/getStackholder',authorization(endPoint.getStackholder),asyncHandler
 router.get('/getDelivery/:orderId',authorization(endPoint.getDelivery),asyncHandler(userController.getDelivery));
 router.get('/getUsers',authorization(endPoint.getUsers),asyncHandler(userController.getUsers));
 router.get('/userWithToken',authorization(endPoint.all),asyncHandler(userController.userWithToken));
+router.patch('/updateUserInfo',authorization(endPoint.all),asyncHandler(userController.updateUserInfo));
 
 export default router;
