@@ -15,3 +15,8 @@ export const getUsers = async(req,res,next)=>{
     const count = await userModel.countDocuments({});
     return res.json({message:"success",count,users});
 };
+export const userWithToken = async(req,res,next)=>{
+    //const {token} = req.body;
+    const users = await userModel.findOne({_id:req.user._id});
+    return res.json({message:'success',users})
+};

@@ -6,8 +6,3 @@ export const createOrder = joi.object({
     address:joi.string(),
     phone:joi.string(),
 });
-export const changeStatus = joi.object({
-    status:joi.string().required(),
-    //deliveryId:generalFeilds.id.required(),
-    id:generalFeilds.id.required(),
-});

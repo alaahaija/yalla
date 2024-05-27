@@ -11,6 +11,6 @@ router.post('/create',asyncHandler(authorization(endPoint.create)),asyncHandler(
 router.get('/getUserOrder',asyncHandler(authorization(endPoint.getUserOrder)),asyncHandler(orderController.getUserOrder));
 router.get('/getDetails/:id',asyncHandler(authorization(endPoint.details)),asyncHandler(orderController.getOrder));
 router.get('/stackholder/all',asyncHandler(authorization(endPoint.getStackholderOrder)),asyncHandler(orderController.getStackholderOrder));
-router.patch('/changeStatus/:id',asyncHandler(authorization(endPoint.changeStatus)),validation(orderValidator.changeStatus),asyncHandler(orderController.changeStatus));
+router.patch('/changeStatus/:id',asyncHandler(authorization(endPoint.changeStatus)),asyncHandler(orderController.changeStatus));
 
 export default router;
